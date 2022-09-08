@@ -23,6 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: Get current date and time
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -41,4 +45,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/spring-postgres_backend:${{ github.event.repository.updated_at }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/spring-postgres_backend:${{ steps.date.outputs.date }}
