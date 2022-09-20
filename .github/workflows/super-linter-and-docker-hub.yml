@@ -44,5 +44,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
+          file: ./backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/spring-postgres_backend_${{ steps.date.outputs.date }}
